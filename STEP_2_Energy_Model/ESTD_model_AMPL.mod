@@ -69,6 +69,9 @@ set HOUR_OF_PERIOD {t in PERIODS} := setof {h in HOURS, td in TYPICAL_DAYS: (t,h
 set COGEN within TECHNOLOGIES; # cogeneration tech
 set BOILERS within TECHNOLOGIES; # boiler tech
 
+set EXCHANGE_NETWORK_R within RESOURCES; # Resources exchanged through a network
+set EXCHANGE_NETWORK_BIDIRECTIONAL within EXCHANGE_NETWORK_R; # Resources exchanged through a bidirectional network
+
 #################################
 ### PARAMETERS [Tables 1-2]   ###
 #################################
@@ -114,20 +117,21 @@ param fmax_perc {COUNTRIES, TECHNOLOGIES} >= 0, <= 1 default 1; # value in [0,1]
 param fmin_perc {COUNTRIES, TECHNOLOGIES} >= 0, <= 1 default 0; # value in [0,1]: this is to fix that a technology can at min produce a certain % of the total output of its sector over the entire year
 param avail_local {COUNTRIES, RESOURCES} >= 0; # Yearly availability of resources [GWh/y]
 param avail_exterior {COUNTRIES, RESOURCES} >= 0;
-param c_op_local {COUNTRIES, RESOURCES} >= 0; # cost of resources in the different periods [MCHF/GWh]
+param c_op_local {COUNTRIES, RESOURCES} >= 0; # cost of resources in the different periods [MEur/GWh]
 param c_op_exterior {RESOURCES} >= 0; 
 param vehicule_capacity {TECHNOLOGIES} >=0, default 0; #  veh_capa [capacity/vehicles] Average capacity (pass-km/h or t-km/h) per vehicle. It makes the link between F and the number of vehicles
 param peak_sh_factor{COUNTRIES} >= 0;   # %_Peak_sh [-]: ratio between highest yearly demand and highest TDs demand
 param layers_in_out {RESOURCES union TECHNOLOGIES diff STORAGE_TECH , LAYERS}; # f: input/output Resources/Technologies to Layers. Reference is one unit ([GW] or [Mpkm/h] or [Mtkm/h]) of (main) output of the resource/technology. input to layer (output of technology) > 0.
-param c_inv {COUNTRIES, TECHNOLOGIES} >= 0; # Specific investment cost [MCHF/GW].[MCHF/GWh] for STORAGE_TECH
-param c_maint {COUNTRIES, TECHNOLOGIES} >= 0; # O&M cost [MCHF/GW/year]: O&M cost does not include resource (fuel) cost. [MCHF/GWh/year] for STORAGE_TECH
+param c_inv {COUNTRIES, TECHNOLOGIES} >= 0; # Specific investment cost [MEur/GW].[MEur/GWh] for STORAGE_TECH
+param c_maint {COUNTRIES, TECHNOLOGIES} >= 0; # O&M cost [MEur/GW/year]: O&M cost does not include resource (fuel) cost. [MEur/GWh/year] for STORAGE_TECH
 param lifetime {COUNTRIES, TECHNOLOGIES} >= 0; # n: lifetime [years]
 param tau {c in COUNTRIES, i in TECHNOLOGIES} := i_rate * (1 + i_rate)^lifetime [c,i] / (((1 + i_rate)^lifetime [c,i]) - 1); # Annualisation factor ([-]) for each different technology [Eq. 2]
 param gwp_constr {COUNTRIES, TECHNOLOGIES} >= 0; # GWP emissions associated to the construction of technologies [ktCO2-eq./GW]. Refers to [GW] of main output
-param gwp_op_local {RESOURCES} >= 0; # GWP emissions associated to the use of resources [ktCO2-eq./GWh]. Includes extraction/production/transportation and combustion
-param gwp_op_exterior {RESOURCES} >= 0;
+param gwp_op_local {RESOURCES} >= 0; # GWP emissions associated to the use of local resources [ktCO2-eq./GWh]. Includes extraction/production/transportation and combustion
+param gwp_op_exterior {RESOURCES} >= 0; # GWP emissions associated to the use of exterior resources [ktCO2-eq./GWh]. Includes extraction/production/transportation and combustion
+param gwp_direct {RESOURCES} >= 0; # net GWP emissions associated to the combustion of resources [ktCO2-eq./GWh], used to match with EU objectives
 param c_p {COUNTRIES, TECHNOLOGIES} >= 0, <= 1 default 1; # yearly capacity factor of each technology [-], defined on annual basis. Different than 1 if sum {t in PERIODS} F_t (t) <= c_p * F
-param transfer_capacity {COUNTRIES, COUNTRIES, RESOURCES} default 0; #maximal transfer capacity of each resource between countries [GW]
+param transfer_capacity {COUNTRIES, COUNTRIES, RESOURCES} default 0; # Transfer capacity already installed for each resource between countries [GW]
 param exchange_losses {RESOURCES} >=0 default 0; #losses on network for exchanges [%]
 
 
@@ -155,6 +159,7 @@ param total_time := sum {t in PERIODS, h in HOUR_OF_PERIOD [t], td in TYPICAL_DA
 # Parameters for additional freight due to exchanges calcultations
 param  lhv{FREIGHT_RESOURCES}>=0; #lhv of fuels transported by freight
 param  dist{COUNTRIES}>=0; #travelled distance by fuels exchanged in each country
+param  c_exch_network{COUNTRIES,COUNTRIES,EXCHANGE_NETWORK_R} >= 0; # Investment cost of network connections between cells [MEur/GW/year]
 
 #################################
 ###   VARIABLES [Tables 3-4]  ###
@@ -188,16 +193,20 @@ var F_t_solar       {COUNTRIES, TECHNOLOGIES_OF_END_USES_TYPE["HEAT_LOW_T_DECEN"
 ##Dependent variables [Table 4] :
 var End_uses {COUNTRIES, LAYERS, HOURS, TYPICAL_DAYS} >= 0; #EndUses [GW]: total demand for each type of end-uses (hourly power). Defined for all layers (0 if not demand). [Mpkm] or [Mtkm] for passenger or freight mobility.
 var TotalCost{COUNTRIES} >= 0; # C_tot [ktCO2-eq./year]: Total GWP emissions in the system.
-var C_inv {COUNTRIES, TECHNOLOGIES} >= 0; #C_inv [MCHF]: Total investment cost of each technology
-var C_maint {COUNTRIES, TECHNOLOGIES} >= 0; #C_maint [MCHF/year]: Total O&M cost of each technology (excluding resource cost)
-var C_op {COUNTRIES, RESOURCES} >= 0; #C_op [MCHF/year]: Total O&M cost of each resource
+var C_inv {COUNTRIES, TECHNOLOGIES} >= 0; #C_inv [MEur]: Total investment cost of each technology
+var C_maint {COUNTRIES, TECHNOLOGIES} >= 0; #C_maint [MEur/year]: Total O&M cost of each technology (excluding resource cost)
+var C_op {COUNTRIES, RESOURCES} >= 0; #C_op [MEur/year]: Total O&M cost of each resource
+var C_exch_network {COUNTRIES, EXCHANGE_NETWORK_R} >= 0; # Total investment cost of network connections between cells [MEur/year]
 var TotalGWP{COUNTRIES} >= 0; # GWP_tot [ktCO2-eq./year]: Total global warming potential (GWP) emissions in the system
 var GWP_constr {COUNTRIES, TECHNOLOGIES} >= 0; # GWP_constr [ktCO2-eq.]: Total emissions of the technologies
-var GWP_op {COUNTRIES, RESOURCES} >= 0; #  GWP_op [ktCO2-eq.]: Total yearly emissions of the resources [ktCO2-eq./y]
+var GWP_op {COUNTRIES, RESOURCES} >= 0; # GWP_op [ktCO2-eq.]: Total yearly emissions of the resources [ktCO2-eq./y]
+var GWP_direct {COUNTRIES, RESOURCES} >=0; # Total yearly direct emissions of the resources [ktCO2-eq./y]
 var Network_losses {COUNTRIES, END_USES_TYPES, HOURS, TYPICAL_DAYS} >= 0; # Net_loss [GW]: Losses in the networks (normally electricity grid and DHN)
 var Storage_level {COUNTRIES, STORAGE_TECH, PERIODS} >= 0; # Sto_level [GWh]: Energy stored at each period
-var Exchanges{COUNTRIES,COUNTRIES, RESOURCES, HOURS, TYPICAL_DAYS}; # Exchanges of imported ressource between countries during a certain period t [GW]
+var Exch_imp{COUNTRIES,COUNTRIES, RESOURCES, HOURS, TYPICAL_DAYS} >= 0; # Positive part (import) of the exchanges of ressource between countries during a certain period t [GW]
+var Exch_exp{COUNTRIES,COUNTRIES, RESOURCES, HOURS, TYPICAL_DAYS} >= 0; # Negative part (export) of the exchanges of ressource between countries during a certain period t [GW]
 var Exch_Freight{COUNTRIES}>=0; # yearly additional freight due to exchanges
+var Transfer_capacity{c1 in COUNTRIES, c2 in COUNTRIES, i in RESOURCES} >= transfer_capacity[c1, c2, i], <= 1000*ceil(transfer_capacity[c1,c2,i]/10000); # Transfer capacity of resources between countries [GW]
 
 #########################################
 ###      CONSTRAINTS Eqs [1-42]       ###
@@ -242,7 +251,7 @@ subject to end_uses_t {c in COUNTRIES, l in LAYERS, h in HOURS, td in TYPICAL_DA
 
 # [Eq. 1]	
 subject to totalcost_cal{c in COUNTRIES}:
-	TotalCost[c] = sum {j in TECHNOLOGIES} (tau [c,j]  * C_inv [c,j] + C_maint [c,j]) + sum {i in RESOURCES} C_op [c,i];
+	TotalCost[c] = sum {j in TECHNOLOGIES} (tau [c,j]  * C_inv [c,j] + C_maint [c,j]) + sum {i in RESOURCES} C_op [c,i] + sum {i in EXCHANGE_NETWORK_R} C_exch_network [c,i];
 	
 # [Eq. 3] Investment cost of each technology
 subject to investment_cost_calc {c in COUNTRIES, j in TECHNOLOGIES}: 
@@ -255,6 +264,12 @@ subject to main_cost_calc {c in COUNTRIES, j in TECHNOLOGIES}:
 # [Eq. 5] Total cost of each resource
 subject to op_cost_calc {c in COUNTRIES, i in RESOURCES}:
 	C_op [c,i] = sum {t in PERIODS, h in HOUR_OF_PERIOD [t], td in TYPICAL_DAY_OF_PERIOD [t]} (c_op_local [c, i] * R_t_local [c, i, h, td] * t_op [h, td] + c_op_exterior [i] * R_t_exterior [c, i, h, td] * t_op [h, td] ) ;
+
+# [Cornet-Eloy] Cost of network connections between countries
+subject to exch_network_cost_calc {c in COUNTRIES, i in EXCHANGE_NETWORK_R diff EXCHANGE_NETWORK_BIDIRECTIONAL}:
+	C_exch_network [c,i] = sum {c2 in COUNTRIES} (c_exch_network [c,c2,i] * Transfer_capacity [c,c2,i]);
+subject to exch_network_cost_calc_bidirectional {c in COUNTRIES, i in EXCHANGE_NETWORK_BIDIRECTIONAL}:
+	C_exch_network [c,i] = sum {c2 in COUNTRIES} (c_exch_network [c,c2,i] * Transfer_capacity [c,c2,i] / 2);
 
 
 ## Curtailement
@@ -289,6 +304,10 @@ subject to gwp_constr_calc {c in COUNTRIES, j in TECHNOLOGIES}:
 # [Eq. 8]
 subject to gwp_op_calc {c in COUNTRIES, i in RESOURCES}:
 	GWP_op [c,i] = sum {t in PERIODS, h in HOUR_OF_PERIOD [t], td in TYPICAL_DAY_OF_PERIOD [t]} (R_t_local [c, i, h, td] * gwp_op_local [i] * t_op [h, td] + R_t_exterior [c, i, h, td] * gwp_op_exterior [i] * t_op [h, td] );	
+
+# [Cornet-Eloy] Direct emissions of the fuels, to match GWP historical data
+subject to gwp_direct_calc {c in COUNTRIES, i in RESOURCES}:
+	GWP_direct [c,i] = sum {t in PERIODS, h in HOUR_OF_PERIOD [t], td in TYPICAL_DAY_OF_PERIOD [t]} (R_t_local [c, i, h, td] * gwp_direct [i] * t_op [h, td] + R_t_exterior [c, i, h, td] * gwp_direct [i] * t_op [h, td] );	
 
 	
 ## Multiplication factor
@@ -357,11 +376,16 @@ subject to storage_layer_in {c in COUNTRIES, j in STORAGE_TECH, l in LAYERS, h i
 	Storage_in [c, j, l, h, td] * (ceil (storage_eff_in [j, l]) - 1) = 0;
 subject to storage_layer_out {c in COUNTRIES, j in STORAGE_TECH, l in LAYERS, h in HOURS, td in TYPICAL_DAYS}:
 	Storage_out [c, j, l, h, td] * (ceil (storage_eff_out [j, l]) - 1) = 0;
-		
+
 # [Eq. 19] limit the Energy to power ratio. 
-subject to limit_energy_to_power_ratio {c in COUNTRIES, j in STORAGE_TECH , l in LAYERS, h in HOURS, td in TYPICAL_DAYS}:
+subject to limit_energy_to_power_ratio {c in COUNTRIES, j in STORAGE_TECH diff {"BEV_BATT","PHEV_BATT"}, l in LAYERS, h in HOURS, td in TYPICAL_DAYS}:
 	Storage_in [c, j, l, h, td] * storage_charge_time[c,j] + Storage_out [c, j, l, h, td] * storage_discharge_time[c,j] <=  F [c, j] * storage_availability[j];
-	
+
+# [Eq. 2.19-bis] limit the Energy to power ratio. 
+subject to limit_energy_to_power_ratio_bis {c in COUNTRIES, i in V2G, j in EVs_BATT_OF_V2G[i], l in LAYERS, h in HOURS, td in TYPICAL_DAYS}:
+    Storage_in [c, j, l, h, td] * storage_charge_time[c,j] + (Storage_out [c, j, l, h, td] + layers_in_out[i,"ELECTRICITY"]* F_t [c, i, h, td]) * storage_discharge_time[c,j]  <= ( F [c, j] - F_t [c,i,h,td] / vehicule_capacity [i] * batt_per_car[i] ) * storage_availability[j];
+
+
 
 ## Infrastructure
 #----------------
@@ -459,9 +483,9 @@ subject to Minimum_GWP_reduction {c in COUNTRIES}:
 	TotalGWP[c] <= gwp_limit[c];
 	
 # [Eq. 36]  constraint to reduce the GWP subject to Minimum_gwp_reduction :
+# Cornet-Eloy: modified to account for direct emissions only
 subject to Minimum_GWP_reduction_global :
-	sum{c in COUNTRIES, r in RESOURCES} (GWP_op [c,r]) <= gwp_limit_global;
-	#sum{c in COUNTRIES} TotalGWP[c] <= gwp_limit_global;
+	sum{c in COUNTRIES, r in RESOURCES} (GWP_direct [c,r]) <= gwp_limit_global;
 
 # [Eq. 37] Minimum share of RE in primary energy supply
 subject to Minimum_RE_share {c in COUNTRIES} :
@@ -500,20 +524,31 @@ subject to solar_area_limited250km2 {c in COUNTRIES} :
 
 
 
+#-----------------------
 # EQUATIONS MC
+# Adapted in Cornet-Eloy
 #-----------------------
 
 subject to reciprocity_of_Exchanges {c1 in COUNTRIES, c2 in COUNTRIES, i in RESOURCES, h in HOURS, td in TYPICAL_DAYS} :
-	Exchanges [c1,c2,i,h,td] = - Exchanges [c2,c1,i,h,td];
+	Exch_imp[c1,c2,i,h,td] - Exch_exp[c1,c2,i,h,td] = - Exch_imp[c2,c1,i,h,td] + Exch_exp[c2,c1,i,h,td];
 	
 subject to resources_no_exchanges {c1 in COUNTRIES, c2 in COUNTRIES, n in NOEXCHANGES, h in HOURS, td in TYPICAL_DAYS} :
-	Exchanges [c1,c2,n,h,td] = 0;
+	Exch_imp[c1,c2,n,h,td] - Exch_exp[c1,c2,n,h,td] = 0;
 
-subject to capacity_limit {c1 in COUNTRIES, c2 in COUNTRIES, i in RESOURCES, h in HOURS, td in TYPICAL_DAYS} :
-	-transfer_capacity [c2,c1,i] <= Exchanges [c1,c2,i,h,td] <= transfer_capacity [c1,c2,i];
+subject to capacity_limit_imp {c1 in COUNTRIES, c2 in COUNTRIES, i in RESOURCES, h in HOURS, td in TYPICAL_DAYS} :
+	Exch_imp[c1,c2,i,h,td] <= Transfer_capacity [c1,c2,i];
+subject to capacity_limit_exp {c1 in COUNTRIES, c2 in COUNTRIES, i in RESOURCES, h in HOURS, td in TYPICAL_DAYS} :
+	Exch_exp[c1,c2,i,h,td] <= Transfer_capacity [c2,c1,i];
+subject to invariable_transfer_capacity {c1 in COUNTRIES, c2 in COUNTRIES, i in RESOURCES diff EXCHANGE_NETWORK_R}:
+	Transfer_capacity [c1,c2,i] = transfer_capacity [c1,c2,i];
+subject to bidirectonal_exchanges {c1 in COUNTRIES, c2 in COUNTRIES, i in EXCHANGE_NETWORK_BIDIRECTIONAL}:
+	Transfer_capacity [c1,c2,i] = Transfer_capacity [c2,c1,i];
 	
 subject to importation {c1 in COUNTRIES, i in RESOURCES, h in HOURS, td in TYPICAL_DAYS}:
-	R_t_import[c1, i, h, td]  = R_t_export[c1 , i, h, td] + sum{c2 in COUNTRIES} (Exchanges[c1,c2,i,h,td]);
+	R_t_import[c1, i, h, td]  = sum{c2 in COUNTRIES} Exch_imp[c1,c2,i,h,td];
+subject to exportation {c1 in COUNTRIES, i in RESOURCES, h in HOURS, td in TYPICAL_DAYS}:
+	R_t_export[c1, i, h, td]  = sum{c2 in COUNTRIES} Exch_exp[c1,c2,i,h,td];
+
 
 
 ##########################

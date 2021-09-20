@@ -50,6 +50,8 @@ option cplex_options $cplex_options 'timelimit 64800 ';
 
 
 param PathName symbolic default "output";
+param filePath symbolic default "";
+param fileExt symbolic default ".txt";
 
 		#let re_share_primary := 0.5;
 
@@ -119,7 +121,10 @@ param PathName symbolic default "output";
 				else
 						printf "%s\t%.6f\t%.6f\t%.6f\n", i, 0, 0, C_op[c,i] > ( PathName & "/cost_breakdown_" & c & ".txt");
 				}
-				printf "%s\t%.6f\t%.6f\t%.6f", "Total [M€/y]", sum{i in TECHNOLOGIES} (tau [c,i] * C_inv [c,i]), sum{i in TECHNOLOGIES} C_maint [c,i], sum{i in RESOURCES} C_op[c,i] > ( PathName & "/cost_breakdown_" & c & ".txt");
+				for {i in EXCHANGE_NETWORK_R}{
+					printf "%s%s\t%.6f\t%.6f\t%.6f\n", "Exch network ", i, C_exch_network [c,i], 0, 0 > ( PathName & "/cost_breakdown_" & c & ".txt");
+				}
+				printf "%s\t%.6f\t%.6f\t%.6f", "Total [M€/y]", sum{i in TECHNOLOGIES} (tau [c,i] * C_inv [c,i]) + sum{i in EXCHANGE_NETWORK_R} C_exch_network [c,i], sum{i in TECHNOLOGIES} C_maint [c,i], sum{i in RESOURCES} C_op[c,i] > ( PathName & "/cost_breakdown_" & c & ".txt");
 				
 
 				#------------------------------------------
@@ -219,7 +224,7 @@ param PathName symbolic default "output";
 				for{i in RESOURCES}{
 					printf "\n%s", i > (PathName & "/exch_" & c & ".txt");
 					for{c2 in COUNTRIES}{
-						printf "\t%.6f", sum {t in PERIODS, h in HOUR_OF_PERIOD[t], td in TYPICAL_DAY_OF_PERIOD[t]} Exchanges[c, c2, i, h, td] > (PathName & "/exch_" & c & ".txt");
+						printf "\t%.6f", sum {t in PERIODS, h in HOUR_OF_PERIOD[t], td in TYPICAL_DAY_OF_PERIOD[t]} (Exch_imp[c,c2,i,h,td] - Exch_exp[c,c2,i,h,td]) > (PathName & "/exch_" & c & ".txt");
 					}
 				}
 				
@@ -586,7 +591,7 @@ param PathName symbolic default "output";
 					printf "\n%d\t%d\t%d",t,h,td   > (PathName & "/hourly_data_year" & "/exch_" & c & ".txt");
 					for {i in RESOURCES}{
 						for {c2 in COUNTRIES}{
-							printf "\t%.6f", Exchanges[c, c2, i, h, td] > (PathName & "/hourly_data_year" & "/exch_" & c & ".txt");
+							printf "\t%.6f", Exch_imp[c,c2,i,h,td] - Exch_exp[c,c2,i,h,td] > (PathName & "/hourly_data_year" & "/exch_" & c & ".txt");
 						}
 					}	
 				}
@@ -903,7 +908,7 @@ param PathName symbolic default "output";
 					printf "\n%d\t%d",td,h   > (PathName & "/hourly_data_TD" & "/exch_" & c & ".txt");
 					for {i in RESOURCES}{
 						for {c2 in COUNTRIES}{
-							printf "\t%.6f", Exchanges[c, c2, i, h, td] > (PathName & "/hourly_data_TD" & "/exch_" & c & ".txt");
+							printf "\t%.6f", Exch_imp[c,c2,i,h,td] - Exch_exp[c,c2,i,h,td] > (PathName & "/hourly_data_TD" & "/exch_" & c & ".txt");
 						}
 					}	
 				}
@@ -942,7 +947,75 @@ param PathName symbolic default "output";
 			#																			  #
 			###############################################################################
 		
-
+        	#------------------------------------------
+        	## Print Transfer capacities to txt file.
+        	#------------------------------------------
+        	print ("--------------SAVING Transfer capacities-----------");
+        	let filePath := (PathName & "/Transfer_capacities" & fileExt);
+        	for {i in EXCHANGE_NETWORK_R}{
+                printf "%s",i > (filePath);
+                for {c in COUNTRIES}{
+                    printf "\t%s",c > (filePath);
+                }
+                for {c1 in COUNTRIES}{
+                    printf "\n%s",c1 > (filePath);
+                    for {c2 in COUNTRIES}{
+                        printf "\t%.6f",Transfer_capacity[c1,c2,i] > (filePath);
+                    }
+                }
+                printf "\n\n" > (filePath);
+        	}
+        
+        	#------------------------------------------
+        	## Print Used TC to txt file.
+        	#------------------------------------------
+        	print ("--------------SAVING Used TC-----------");
+        	let filePath := (PathName & "/Transfer_capacities_used" & fileExt);
+        	for {i in EXCHANGE_NETWORK_R}{
+                printf "%s",i > (filePath);
+                for {c1 in COUNTRIES}{
+                    printf "\t%s",c1 > (filePath);
+                }
+                for {c2 in COUNTRIES}{
+                    printf "\n%s",c2 > (filePath);
+                    for {c1 in COUNTRIES}{
+                        printf "\t%.6f",max {h in HOURS, td in TYPICAL_DAYS} Exch_exp[c1,c2,i,h,td] > (filePath);
+                    }
+                }
+                printf "\n\n" > (filePath);
+            }
+        
+        	#------------------------------------------
+        	## Print Total transfers to txt file.
+        	#------------------------------------------
+        	print ("--------------SAVING Total transfers-----------");
+        	let filePath := (PathName & "/Transfers" & fileExt);
+        	for {i in EXCHANGE_NETWORK_R}{
+                printf "%s",i > (filePath);
+                for {c1 in COUNTRIES}{
+                    printf "\t%s",c1 > (filePath);
+                }
+                for {c2 in COUNTRIES}{
+                    printf "\n%s",c2 > (filePath);
+                    for {c1 in COUNTRIES}{
+                        printf "\t%.6f",sum{t in PERIODS, h in HOUR_OF_PERIOD[t], td in TYPICAL_DAY_OF_PERIOD[t]}  Exch_exp[c1,c2,i,h,td] > (filePath);
+                    }
+                }
+                printf "\n\n" > (filePath);
+            }
+        	for {i in RESOURCES diff NOEXCHANGES diff EXCHANGE_NETWORK_R}{
+                printf "%s",i > (filePath);
+                for {c1 in COUNTRIES}{
+                    printf "\t%s",c1 > (filePath);
+                }
+                for {c2 in COUNTRIES}{
+                    printf "\n%s",c2 > (filePath);
+                    for {c1 in COUNTRIES}{
+                        printf "\t%.6f",sum{t in PERIODS, h in HOUR_OF_PERIOD[t], td in TYPICAL_DAY_OF_PERIOD[t]}  Exch_exp[c1,c2,i,h,td] > (filePath);
+                    }
+                }
+                printf "\n\n" > (filePath);
+            }
 
 			#########################################
 			#				Year summary			#
@@ -959,7 +1032,10 @@ param PathName symbolic default "output";
 			else
 					printf "%s\t%.6f\t%.6f\t%.6f\n", i, 0, 0, sum{c in COUNTRIES} (C_op[c,i]) > ( PathName & "/cost_breakdown_" & "ALL" & ".txt"); ;
 			}
-			printf "%s\t%.6f\t%.6f\t%.6f", "Total [M€/y]", sum{c in COUNTRIES, i in TECHNOLOGIES} (tau [c,i] * C_inv [c,i]), sum{c in COUNTRIES, i in TECHNOLOGIES} C_maint [c,i], sum{c in COUNTRIES, i in RESOURCES} C_op[c,i] > ( PathName & "/cost_breakdown_" & "ALL" & ".txt");
+			for {i in EXCHANGE_NETWORK_R}{
+				printf "%s%s\t%.6f\t%.6f\t%.6f\n", "Exch network ", i, sum{c in COUNTRIES} C_exch_network [c,i], 0, 0 > ( PathName & "/cost_breakdown_" & "ALL" & ".txt");
+			}
+			printf "%s\t%.6f\t%.6f\t%.6f", "Total [M€/y]", sum{c in COUNTRIES, i in TECHNOLOGIES} (tau [c,i] * C_inv [c,i]) + sum{c in COUNTRIES, i in EXCHANGE_NETWORK_R} C_exch_network [c,i], sum{c in COUNTRIES, i in TECHNOLOGIES} C_maint [c,i], sum{c in COUNTRIES, i in RESOURCES} C_op[c,i] > ( PathName & "/cost_breakdown_" & "ALL" & ".txt");
 				
 
 

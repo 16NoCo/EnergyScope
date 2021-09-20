@@ -1,7 +1,7 @@
 ################################################################################
-################################################################################                                                    
+################################################################################
 ##																			  ##
-##                     			SETTING PROBLEM								  ##                                                    
+##                     			SETTING PROBLEM								  ##
 ##																			  ##
 ################################################################################
 ################################################################################
@@ -16,9 +16,9 @@ data ESTD_12TD.dat; # TDs depending data
 
 
 ################################################################################
-################################################################################                                                    
+################################################################################
 ##																			  ##
-##                      	SOLVER OPTIONS       							  ##                                                    
+##                      	SOLVER OPTIONS       							  ##
 ##																			  ##
 ################################################################################
 ################################################################################
@@ -28,23 +28,27 @@ option solver cplex;
 
 option show_stats 1; # show statistics
 
-option cplex_options  'mipdisplay 5 mipinterval 1000'; 
-option cplex_options $cplex_options 'baropt predual=-1';
+option cplex_options  'mipdisplay 5 mipinterval 1000';
 option log_file 'output/log.txt';   #write the log in a .txt file. Create the file before running.
 
 
-option cplex_options $cplex_options 'mipgap 0.01 '; 
-option cplex_options $cplex_options 'timelimit 64800 '; 
+option cplex_options $cplex_options 'mipgap 0.01 ';
+option cplex_options $cplex_options 'timelimit 64800 ';
+option cplex_options $cplex_options 'baropt predual=-1';
+
+option reset_initial_guesses 1;
+option dual_initial_guesses 0;
+option send_statuses 0;
 
 #READ# option cplex_options $cplex_options 'startbasis ./output/solution.bas '; # to read previously existing path
-#SAVE# 
+#SAVE#
 option cplex_options $cplex_options 'endbasis ./output/solution.bas '; # to write how to solve
 
 
 ################################################################################
-################################################################################                                                    
+################################################################################
 ##																			  ##
-##                      	RUN & SAVE PATH      							  ##                                                    
+##                      	RUN & SAVE PATH      							  ##
 ##																			  ##
 ################################################################################
 ################################################################################
@@ -55,20 +59,20 @@ param PathName symbolic default "output/";
 		#let re_share_primary := 0.5;
 
 		print PathName;
-		
+
 		print "gwp_limit_global", gwp_limit_global;
 
 		# Saving and starting from last solution. Starting from last solution is not very efficient.
 		# option cplex_options $cplex_options 'startsol ./output/solution.sol '; # to read previously existing file
-		# 
-		option cplex_options $cplex_options 'endsol ./output/solution.sol '; # to write file 
-		
+		#
+		option cplex_options $cplex_options 'endsol ./output/solution.sol '; # to write file
+
 		option times 1; # show time
 		option gentimes 1; # show time
 
 		solve;
-		
-		
+
+
 		print "TotalGWP_global", sum{c in COUNTRIES} (TotalGWP[c]);
 		print "GWP_op_global", sum{c in COUNTRIES, r in RESOURCES} (GWP_op[c,r]);
 		print "TotalCost_global", sum{c in COUNTRIES} (TotalCost[c]);
@@ -81,15 +85,15 @@ param PathName symbolic default "output/";
 		option times 0; # show time
 		option gentimes 0; # show time
 
-		
+
 		if solve_result = "limit" # To avoid post treatment error
-		then print "TIME OUT"; 
+		then print "TIME OUT";
 		else {
-		
+
 			################################################################################
-			################################################################################                                                    
+			################################################################################
 			##																			  ##
-			##                     			SAVING RESULTS								  ##                                                    
+			##                     			SAVING RESULTS								  ##
 			##																			  ##
 			################################################################################
 			################################################################################
@@ -97,24 +101,24 @@ param PathName symbolic default "output/";
 			option show_stats 0; # show statistics
 			option times 0; # show time
 			option gentimes 0; # show time
-			
-			
-			###############################################################################                                                    
+
+
+			###############################################################################
 			#																			  #
-			#                     			  LOCAL SYSTEMS    							  #                                                    
+			#                     			  LOCAL SYSTEMS    							  #
 			#																			  #
 			###############################################################################
-			
-			
-			
+
+
+
 			################################################################################
-			################################################################################                                                    
+			################################################################################
 			##																			  ##
-			##                     			    SANKEY 	     							  ##                                                    
+			##                     			    SANKEY 	     							  ##
 			##																			  ##
 			################################################################################
 			################################################################################
 			#### PRINT OF SANKEY NOT UPDATED
-			
-			
+
+
 		}# END SAVING
