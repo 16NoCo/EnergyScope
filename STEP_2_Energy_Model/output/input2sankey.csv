@@ -1,0 +1,51 @@
+source,target,realValue,layerID,layerColor,layerUnit
+Diesel,Freight,120.04,Diesel,#D3D3D3,TWh
+NG Fossil,NG,1775.98,NG,#FFD700,TWh
+NG,Freight,10.82,NG,#FFD700,TWh
+NG,Mob public,649.65,NG,#FFD700,TWh
+NG,H2,197.09,NG,#FFD700,TWh
+NG,Non-Energy,1128.65,NG,#FFD700,TWh
+Wind Onshore,Elec,3886.17,Wind Onshore,#27AE34,TWh
+Wind Offshore,Elec,30.50,Wind Offshore,#27AE34,TWh
+Hydro Dams,Elec,149.76,Hydro Dam,#00CED1,TWh
+Hydro River,Elec,120.50,Hydro River,#0000FF,TWh
+Coal,Elec,1823.01,Coal,#A0522D,TWh
+Coal,Boilers,730.63,Coal,#A0522D,TWh
+Solar PV,Elec,213.45,Solar,#FFFF00,TWh
+Geothermal,Elec,6.55,Geothermal,#FF0000,TWh
+Geothermal,DHN,18.63,Geothermal,#FF0000,TWh
+Waste,Boilers,337.08,Waste,#808000,TWh
+Wet Biomass,NG,703.44,Wet Biomass,#336600,TWh
+Wood,SLF,180.27,Wood,#CD853F,TWh
+Wood,Boilers,320.55,Wood,#CD853F,TWh
+Elec,Mob public,64.98,Electricity,#00BFFF,TWh
+Elec,Freight,50.25,Electricity,#00BFFF,TWh
+Elec,Loss,414.37,Electricity,#00BFFF,TWh
+Elec,Elec demand,2158.53,Electricity,#00BFFF,TWh
+Elec,Cold,45.49,Electricity,#00BFFF,TWh
+Elec,Chiller,51.80,Electricity,#00BFFF,TWh
+Elec,Storage,30.81,Electricity,#00BFFF,TWh
+Storage,Elec demand,26.68,Electricity,#00BFFF,TWh
+Storage,Loss,4.13,Electricity,#00BFFF,TWh
+Elec,HPs,1077.29,Electricity,#00BFFF,TWh
+Elec,H2,1438.08,Electricity,#00BFFF,TWh
+Elec,Heat HT,17.85,Electricity,#00BFFF,TWh
+H2,Freight,538.06,H2,#FF00FF,TWh
+H2,Mob priv,914.61,H2,#FF00FF,TWh
+HPs,Heat LT Dec,1937.29,Heat LT,#FA8072,TWh
+HPs,DHN,1352.98,Heat LT,#FA8072,TWh
+HPs,Dec. Sto,280.07,Heat LT,#FA8072,TWh
+SLF,Elec,2.86,Electricity,#00BFFF,TWh
+Boilers,Heat HT,1152.62,Heat HT,#DC143C,TWh
+Dec. Sto,Heat LT Dec,260.89,Heat LT,#FA8072,TWh
+DHN,Heat LT DHN,964.58,Heat LT,#FA8072,TWh
+DHN,Loss DHN,97.79,Heat LT,#FA8072,TWh
+DHN,DHN Sto,334.63,Heat LT,#FA8072,TWh
+DHN Sto,Heat LT DHN,319.63,Heat LT,#FA8072,TWh
+SLF,Diesel,120.04,SLF,#8C028C,TWh
+Heat HT,Ind Heat Demand,916.70,Heat HT,#DC143C,TWh
+Cold,Cold Storage,94.75,Cold,#00CED1,TWh
+Cold Storage,Space Cooling,74.24,Cold,#00CED1,TWh
+Cold,Space Cooling,187.24,Cold,#00CED1,TWh
+Chiller,Process Cooling,357.47,Cold,#00CED1,TWh
+Elec,Curt,169.71,Electricity,#00BFFF,TWh

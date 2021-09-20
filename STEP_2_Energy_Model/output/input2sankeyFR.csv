@@ -1,0 +1,48 @@
+source,target,realValue,layerID,layerColor,layerUnit
+Diesel,Freight,19.52,Diesel,#D3D3D3,TWh
+NG Fossil,NG,267.96,NG,#FFD700,TWh
+NG,Mob public,134.60,NG,#FFD700,TWh
+NG,H2,8.91,NG,#FFD700,TWh
+NG,Non-Energy,176.15,NG,#FFD700,TWh
+Wind Onshore,Elec,712.60,Wind Onshore,#27AE34,TWh
+Hydro Dams,Elec,26.98,Hydro Dam,#00CED1,TWh
+Hydro River,Elec,24.82,Hydro River,#0000FF,TWh
+Solar PV,Elec,7.03,Solar,#FFFF00,TWh
+Geothermal,DHN,4.36,Geothermal,#FF0000,TWh
+Waste,Boilers,57.78,Waste,#808000,TWh
+Wet Biomass,NG,172.98,Wet Biomass,#336600,TWh
+Wood,SLF,29.31,Wood,#CD853F,TWh
+Wood,Boilers,157.99,Wood,#CD853F,TWh
+Elec,Mob public,13.46,Electricity,#00BFFF,TWh
+Elec,Freight,10.38,Electricity,#00BFFF,TWh
+Elec,Loss,77.84,Electricity,#00BFFF,TWh
+Elec,Elec demand,391.19,Electricity,#00BFFF,TWh
+Elec,Cold,6.75,Electricity,#00BFFF,TWh
+Elec,Chiller,10.87,Electricity,#00BFFF,TWh
+Elec,Storage,1.74,Electricity,#00BFFF,TWh
+Storage,Elec demand,1.50,Electricity,#00BFFF,TWh
+Storage,Loss,0.23,Electricity,#00BFFF,TWh
+Elec,HPs,177.33,Electricity,#00BFFF,TWh
+Elec,H2,332.53,Electricity,#00BFFF,TWh
+H2,Freight,120.38,H2,#FF00FF,TWh
+H2,Mob priv,189.49,H2,#FF00FF,TWh
+HPs,Heat LT Dec,322.14,Heat LT,#FA8072,TWh
+HPs,DHN,222.69,Heat LT,#FA8072,TWh
+HPs,Dec. Sto,42.86,Heat LT,#FA8072,TWh
+SLF,Elec,0.46,Electricity,#00BFFF,TWh
+Boilers,Heat HT,183.96,Heat HT,#DC143C,TWh
+Dec. Sto,Heat LT Dec,40.84,Heat LT,#FA8072,TWh
+DHN,Heat LT DHN,157.27,Heat LT,#FA8072,TWh
+DHN,Loss DHN,16.30,Heat LT,#FA8072,TWh
+DHN,DHN Sto,59.35,Heat LT,#FA8072,TWh
+DHN Sto,Heat LT DHN,55.91,Heat LT,#FA8072,TWh
+SLF,Diesel,19.52,SLF,#8C028C,TWh
+Heat HT,Ind Heat Demand,125.28,Heat HT,#DC143C,TWh
+Cold,Cold Storage,12.15,Cold,#00CED1,TWh
+Cold Storage,Space Cooling,11.29,Cold,#00CED1,TWh
+Cold,Space Cooling,29.71,Cold,#00CED1,TWh
+Chiller,Process Cooling,75.00,Cold,#00CED1,TWh
+Elec Import,Elec,499.20,Electricity,#00BFFF,TWh
+Local Wood,Wood,187.30,Wood,#CD853F,TWh
+Local Waste,Waste,57.78,Waste,#808000,TWh
+Elec,Elec Export,234.65,Electricity,#00BFFF,TWh

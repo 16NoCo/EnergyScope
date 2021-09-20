@@ -1,0 +1,485 @@
+output
+gwp_limit_global 1618750
+#				incremental	total
+#phase		seconds		memory		memory
+#execute	0.028254	6043512		6043512
+### ESMC_main_print_all_readsol.run:70(3077)   option ...
+#execute	1e-05		0		6043512
+### ESMC_main_print_all_readsol.run:72(3111)   solve ...
+#compile	0.000506	91136		6134648
+##genmod times:
+##seq      seconds    cum. sec.    mem. inc.  name
+## 88            0            0            0  derstage
+## 92        5e-06        5e-06            0  sstatus
+## 106        6e-06      1.1e-05            0  COUNTRIES
+## 107        2e-06      1.3e-05            0  CWITHOUTDAM
+## 108        4e-06      1.7e-05            0  PERIODS
+## 109        3e-06        2e-05            0  HOURS
+## 110        3e-06      2.3e-05            0  TYPICAL_DAYS
+## 111     0.004227      0.00425       295128  T_H_TD
+## 112        4e-06     0.004254            0  SECTORS
+## 113        1e-06     0.004255            0  END_USES_INPUT
+## 114        1e-06     0.004256            0  END_USES_CATEGORIES
+## 115        3e-06     0.004259            0  END_USES_TYPES_OF_CATEGORY
+## 116        2e-06     0.004261            0  RESOURCES
+## 117        2e-06     0.004263            0  BIOFUELS
+## 118        1e-06     0.004264            0  EXPORT
+## 119        1e-06     0.004265            0  END_USES_TYPES
+## 120        5e-06      0.00427            0  TECHNOLOGIES_OF_END_USES_TYPE
+## 121        2e-06     0.004272            0  STORAGE_TECH
+## 122        2e-06     0.004274            0  STORAGE_OF_END_USES_TYPES
+## 123        1e-06     0.004275            0  INFRASTRUCTURE
+## 125        3e-06     0.004278            0  FREIGHT_RESOURCES
+## 126        3e-06     0.004281            0  LAYERS
+## 127        2e-06     0.004283            0  TECHNOLOGIES
+## 128      1.9e-05     0.004302         3616  TECHNOLOGIES_OF_END_USES_CATEGORY
+## 129        4e-06     0.004306            0  RE_RESOURCES
+## 130        1e-06     0.004307            0  NOEXCHANGES
+## 131        3e-06      0.00431            0  V2G
+## 133        3e-06     0.004313            0  EVs_BATT_OF_V2G
+## 134        1e-06     0.004314            0  STORAGE_DAILY
+## 135        4e-06     0.004318            0  TS_OF_DEC_TECH
+## 136     0.056001     0.060319      1907664  TYPICAL_DAY_OF_PERIOD
+## 137     0.054115     0.114434      1874992  HOUR_OF_PERIOD
+## 140        4e-06     0.114438            0  EXCHANGE_NETWORK_R
+## 141        1e-06     0.114439            0  EXCHANGE_NETWORK_BIDIRECTIONAL
+## 142     0.000115     0.114554            0  electricity_time_series
+## 143      9.5e-05     0.114649            0  heating_time_series
+## 144      9.5e-05     0.114744            0  cooling_time_series
+## 145      9.5e-05     0.114839            0  mob_pass_time_series
+## 146      9.3e-05     0.114932            0  mob_freight_time_series
+## 147     0.000901     0.115833            0  c_p_t
+## 148      1.9e-05     0.115852            0  end_uses_demand_year
+## 149      1.7e-05     0.115869          520  end_uses_input
+## 150        3e-06     0.115872            0  i_rate
+## 151        2e-06     0.115874            0  re_share_primary
+## 152        3e-06     0.115877            0  gwp_limit
+## 154        1e-06     0.115878            0  share_mobility_public_min
+## 155        2e-06      0.11588            0  share_mobility_public_max
+## 156        3e-06     0.115883            0  share_freight_train_min
+## 157        2e-06     0.115885            0  share_freight_train_max
+## 158        3e-06     0.115888            0  share_freight_boat_min
+## 159        2e-06      0.11589            0  share_freight_boat_max
+## 160        2e-06     0.115892            0  share_freight_road_min
+## 161        3e-06     0.115895            0  share_freight_road_max
+## 162        1e-06     0.115896            0  share_heat_dhn_min
+## 163        4e-06       0.1159            0  share_heat_dhn_max
+## 164        1e-06     0.115901            0  t_op
+## 165      3.6e-05     0.115937            0  f_max
+## 166      3.6e-05     0.115973            0  f_min
+## 167      3.9e-05     0.116012            0  fmax_perc
+## 168      3.8e-05      0.11605            0  fmin_perc
+## 169      2.8e-05     0.116078            0  avail_local
+## 170        1e-05     0.116088            0  avail_exterior
+## 171        1e-05     0.116098            0  c_op_local
+## 172        4e-06     0.116102            0  c_op_exterior
+## 173        1e-06     0.116103            0  vehicule_capacity
+## 174        3e-06     0.116106            0  peak_sh_factor
+## 175     0.000177     0.116283            0  layers_in_out
+## 176      3.6e-05     0.116319            0  c_inv
+## 177      3.6e-05     0.116355            0  c_maint
+## 178      3.6e-05     0.116391            0  lifetime
+## 179       0.0001     0.116491        56424  tau
+## 180      3.6e-05     0.116527            0  gwp_constr
+## 181        4e-06     0.116531            0  gwp_op_local
+## 182        3e-06     0.116534            0  gwp_op_exterior
+## 183        4e-06     0.116538            0  gwp_direct
+## 184      3.8e-05     0.116576            0  c_p
+## 185        3e-05     0.116606            0  transfer_capacity
+## 186        3e-06     0.116609            0  exchange_losses
+## 187      4.5e-05     0.116654            0  storage_eff_in
+## 188      4.5e-05     0.116699            0  storage_eff_out
+## 189        4e-06     0.116703            0  storage_losses
+## 190        1e-05     0.116713            0  storage_charge_time
+## 191        9e-06     0.116722            0  storage_discharge_time
+## 192        4e-06     0.116726            0  storage_availability
+## 193        1e-06     0.116727            0  loss_network
+## 194        3e-06      0.11673            0  batt_per_car
+## 195        1e-06     0.116731            0  c_grid_extra
+## 197        3e-06     0.116734            0  solar_area
+## 198        3e-06     0.116737            0  power_density_pv
+## 199        2e-06     0.116739            0  power_density_solar_thermal
+## 200     0.000616     0.117355        32800  total_time
+## 201        5e-06      0.11736            0  lhv
+## 202        1e-06     0.117361            0  dist
+## 203        7e-06     0.117368            0  c_exch_network
+## 204        6e-06     0.117374            0  Share_mobility_public
+## 206        3e-06     0.117377            0  Share_freight_train
+## 208        2e-06     0.117379            0  Share_freight_road
+## 210        3e-06     0.117382            0  Share_freight_boat
+## 212        3e-06     0.117385            0  Share_heat_dhn
+## 214        2e-05     0.117405        25128  F
+## 216     0.016472     0.133877     23773200  F_t
+## 218     0.002846     0.136723      2428384  R_t_local
+## 220     0.000951     0.137674      1048592  R_t_exterior
+## 222     0.000918     0.138592      1048592  R_t_import
+## 224     0.000931     0.139523      1048592  R_t_export
+## 226     0.183886     0.323409    188130624  Storage_in
+## 228     0.030943     0.354352     33554448  Storage_out
+## 230      2.4e-05     0.354376            0  Power_nuclear
+## 232      1.1e-05     0.354387            0  Shares_mobility_passenger
+## 234        5e-06     0.354392            0  Shares_mobility_freight
+## 236        8e-06       0.3544         1560  Shares_lowT_dec
+## 238        3e-06     0.354403         1040  F_solar
+## 240     0.001188     0.355591       989136  F_t_solar
+## 242      0.00358     0.359171      3871160  End_uses
+## 244        9e-06      0.35918            0  TotalCost
+## 246      1.4e-05     0.359194            0  C_inv
+## 248      1.4e-05     0.359208         8200  C_maint
+## 250      3.3e-05     0.359241        32800  C_op
+## 252        5e-06     0.359246            0  C_exch_network
+## 254        1e-06     0.359247            0  TotalGWP
+## 256      2.1e-05     0.359268        20512  GWP_constr
+## 258        5e-06     0.359273            0  GWP_op
+## 260        7e-06      0.35928         4112  GWP_direct
+## 262     0.001426     0.360706      1179328  Network_losses
+## 264     0.125285     0.485991    118355832  Storage_level
+## 266     0.018479      0.50447     16624952  Exch_imp
+## 268     0.005502     0.509972      4194320  Exch_exp
+## 270      1.4e-05     0.509986            0  Exch_Freight
+## 272     0.000175     0.510161        33840  Transfer_capacity
+## 274     0.011453     0.521614      1752600  end_uses_t
+## 276      7.9e-05     0.521693        38400  totalcost_cal
+## 278       0.0001     0.521793        38400  investment_cost_calc
+## 280      7.8e-05     0.521871        24600  main_cost_calc
+## 282      0.19503     0.716901     35328000  op_cost_calc
+## 284      4.4e-05     0.716945        32800  exch_network_cost_calc
+## 286        3e-05     0.716975            0  exch_network_cost_calc_bidirectional
+## 288        4e-06     0.716979            0  Curt
+## 290     0.048262     0.765241     12211200  compute_curt
+## 292     0.000119      0.76536            0  totalGWP_calc
+## 294      8.7e-05     0.765447        69168  gwp_constr_calc
+## 296     0.190802     0.956249     22710408  gwp_op_calc
+## 298     0.189191      1.14544     12639768  gwp_direct_calc
+## 300     0.000154      1.14559        69168  size_limit
+## 302     0.060386      1.20598     35133232  capacity_factor_t
+## 304     0.595779      1.80176    148870416  capacity_factor
+## 306      0.12199      1.92375     31564800  resource_availability_local
+## 308     0.121506      2.04526     31548576  resource_availability_exterior
+## 310      1.07112      3.11637     83989176  layer_balance
+## 312      3.62103       6.7374    308187664  storage_level
+## 314     0.398539      7.13594     82512096  impose_daily_storage
+## 316     0.102389      7.23833     94182664  limit_energy_stored_to_maximum
+## 318     0.174406      7.41273    108905520  storage_layer_in
+## 320     0.171081      7.58382     83755680  storage_layer_out
+## 322     0.395527      7.97934    256186936  limit_energy_to_power_ratio
+## 324     0.034726      8.01407     21242184  limit_energy_to_power_ratio_bis
+## 326     0.093786      8.10785      2496000  network_losses
+## 328        3e-05      8.10788            0  extra_grid
+## 330      1.3e-05       8.1079            0  extra_dhn
+## 332     0.000244      8.10814       142416  constantNuc
+## 334     0.004724      8.11287      3207048  operating_strategy_mob_passenger
+## 336     0.002469      8.11533      1270720  operating_strategy_mobility_freight
+## 338      1.2e-05      8.11535            0  additional_freight
+## 340     0.027175      8.14252     10060800  freight_of_exchanges
+## 342      1.8e-05      8.14254            0  Freight_shares
+## 344     0.002818      8.14536      1794096  thermal_solar_capacity_factor
+## 346      1.4e-05      8.14537            0  thermal_solar_total_capacity
+## 348     0.149092      8.29446     30097304  decentralised_heating_balance
+## 350      3.1e-05      8.29449            0  EV_storage_size
+## 352     0.001064      8.29556       383368  EV_storage_for_V2G_demand
+## 354     0.002473      8.29803      1729584  peak_lowT_dec
+## 356        9e-06      8.29804            0  Max_Heat_Demand
+## 358     0.000269      8.29831        76800  max_dhn_heat_demand
+## 360      2.9e-05      8.29834            0  peak_lowT_dhn
+## 362        4e-06      8.29834            0  Minimum_GWP_reduction
+## 364      1.4e-05      8.29836            0  Minimum_GWP_reduction_global
+## 366     0.226839       8.5252     34076808  Minimum_RE_share
+## 368      3.88944      12.4146    926092896  f_max_perc
+## 370       3.5845      15.9991     90881232  f_min_perc
+## 372      2.5e-05      15.9992            0  extra_efficiency
+## 374      1.4e-05      15.9992            0  storage_level_hydro_dams
+## 376     0.000423      15.9996       121896  impose_hydro_dams_inflow
+## 378     0.000178      15.9998       164376  limit_hydro_dams_output
+## 380        1e-05      15.9998            0  solar_area_limited250km2
+## 382     0.044009      16.0438     27816000  reciprocity_of_Exchanges
+## 384     0.015941      16.0597     12996888  resources_no_exchanges
+## 386     0.028889      16.0886     19781672  capacity_limit_imp
+## 388     0.027864      16.1165     18733080  capacity_limit_exp
+## 390     0.000176      16.1167        71208  invariable_transfer_capacity
+## 392        1e-05      16.1167            0  bidirectonal_exchanges
+## 394     0.027629      16.1443      7283760  importation
+## 396     0.025939      16.1702      8306192  exportation
+## 398        2e-05      16.1703            0  obj
+#genmod		16.1703		2969127720	2975262368
+#merge		0.42092		67108872	3042371240
+#collect	1.19891		1174405200	4216776440
+
+Presolve eliminates 5370210 constraints and 3513354 variables.
+Adjusted problem:
+1721514 variables, all linear
+3081811 constraints, all linear; 9725834 nonzeros
+	2226960 equality constraints
+	854851 inequality constraints
+1 linear objective; 12 nonzeros.
+
+#presolve	7.18931		1189955824	5406732264
+#output		1.81226		0		5406732264
+#Total		26.8205
+CPLEX 12.9.0.0: mipdisplay 5
+mipinterval 1000
+baropt 
+predual=-1
+mipgap 0.01
+timelimit 64800
+startsol ./output/solution.sol
+CPLEX 12.9.0.0: optimal solution; objective 1027151.056
+
+"option abs_boundtol 1.8189894035458565e-12;"
+or "option rel_boundtol 1.3773731653531357e-16;"
+will change deduced dual values.
+
+#execute	2.26882		1084140392	6490872656
+### ESMC_main_print_all_readsol.run:74(3123)   print ...
+gwp_global 2234491.746266785
+#execute	9.6e-05		3088		6490875744
+### ESMC_main_print_all_readsol.run:75(3178)   print ...
+global_cost 1027151.2256085078
+#execute	1.4e-05		0		6490875744
+### ESMC_main_print_all_readsol.run:77(3238)   display ...
+#compile	9e-06		0		6490875744
+##genmod times:
+##seq      seconds    cum. sec.    mem. inc.  name
+##  7        1e-06        1e-06            0  solve_result_num
+#genmod		9e-06		0		6490875744
+solve_result_num = 0
+
+#execute	1e-05		4104		6490879848
+### ESMC_main_print_all_readsol.run:78(3266)   display ...
+#compile	5e-06		0		6490879848
+##genmod times:
+##seq      seconds    cum. sec.    mem. inc.  name
+## 28        1e-06        1e-06            0  _solve_elapsed_time
+#genmod		6e-06		0		6490879848
+_solve_elapsed_time = 8.01213
+
+#execute	5e-06		0		6490879848
+### ESMC_main_print_all_readsol.run:82(3346)   option ...
+### ESMC_main_print_all_readsol.run:83(3376)   option ...
+--------------SAVING COST  ES-PT -----------
+--------------SAVING GWP  ES-PT -----------
+--------------SAVING losses  ES-PT -----------
+--------------SAVING ASSETS  ES-PT -----------
+--------- SAVING Yearly balances  ES-PT --------
+--------- SAVING Exchanges balance  ES-PT --------
+--------- SAVING Resources balances  ES-PT --------
+--------------SAVING elec Storage YEAR  ES-PT -----------
+--------------SAVING TS Storage YEAR  ES-PT -----------
+--------------SAVING Elec Layer YEAR  ES-PT -----------
+--------------SAVING LT Layer YEAR  ES-PT -----------
+--------------SAVING HT Layer YEAR  ES-PT -----------
+--------------SAVING PASSANGER Layer YEAR  ES-PT -----------
+--------------SAVING FREIGHT Layer YEAR  ES-PT -----------
+--------------SAVING Cooling Layer YEAR  ES-PT -----------
+--------------SAVING H2Layer YEAR  ES-PT -----------
+--------------SAVING NGLayer YEAR  ES-PT -----------
+--------------SAVING SLFLayer YEAR  ES-PT -----------
+--------- SAVING Exchanges YEAR  ES-PT --------
+--------- SAVING Resources balance YEAR  ES-PT --------
+--------------SAVING Elec Layer TD ES-PT -----------
+--------------SAVING LT Layer TD ES-PT -----------
+--------------SAVING HT Layer TD ES-PT -----------
+--------------SAVING PASSANGER Layer TD ES-PT -----------
+--------------SAVING FREIGHT Layer TD ES-PT -----------
+--------------SAVING Cooling Layer TD ES-PT -----------
+--------------SAVING H2Layer TD ES-PT -----------
+--------------SAVING NGLayer TD ES-PT -----------
+--------------SAVING SLFLayer TD ES-PT -----------
+--------- SAVING Exchanges TD ES-PT --------
+--------- SAVING Resources balance TD ES-PT --------
+--------------SAVING COST  FR -----------
+--------------SAVING GWP  FR -----------
+--------------SAVING losses  FR -----------
+--------------SAVING ASSETS  FR -----------
+--------- SAVING Yearly balances  FR --------
+--------- SAVING Exchanges balance  FR --------
+--------- SAVING Resources balances  FR --------
+--------------SAVING elec Storage YEAR  FR -----------
+--------------SAVING TS Storage YEAR  FR -----------
+--------------SAVING Elec Layer YEAR  FR -----------
+--------------SAVING LT Layer YEAR  FR -----------
+--------------SAVING HT Layer YEAR  FR -----------
+--------------SAVING PASSANGER Layer YEAR  FR -----------
+--------------SAVING FREIGHT Layer YEAR  FR -----------
+--------------SAVING Cooling Layer YEAR  FR -----------
+--------------SAVING H2Layer YEAR  FR -----------
+--------------SAVING NGLayer YEAR  FR -----------
+--------------SAVING SLFLayer YEAR  FR -----------
+--------- SAVING Exchanges YEAR  FR --------
+--------- SAVING Resources balance YEAR  FR --------
+--------------SAVING Elec Layer TD FR -----------
+--------------SAVING LT Layer TD FR -----------
+--------------SAVING HT Layer TD FR -----------
+--------------SAVING PASSANGER Layer TD FR -----------
+--------------SAVING FREIGHT Layer TD FR -----------
+--------------SAVING Cooling Layer TD FR -----------
+--------------SAVING H2Layer TD FR -----------
+--------------SAVING NGLayer TD FR -----------
+--------------SAVING SLFLayer TD FR -----------
+--------- SAVING Exchanges TD FR --------
+--------- SAVING Resources balance TD FR --------
+--------------SAVING COST  IE-UK -----------
+--------------SAVING GWP  IE-UK -----------
+--------------SAVING losses  IE-UK -----------
+--------------SAVING ASSETS  IE-UK -----------
+--------- SAVING Yearly balances  IE-UK --------
+--------- SAVING Exchanges balance  IE-UK --------
+--------- SAVING Resources balances  IE-UK --------
+--------------SAVING elec Storage YEAR  IE-UK -----------
+--------------SAVING TS Storage YEAR  IE-UK -----------
+--------------SAVING Elec Layer YEAR  IE-UK -----------
+--------------SAVING LT Layer YEAR  IE-UK -----------
+--------------SAVING HT Layer YEAR  IE-UK -----------
+--------------SAVING PASSANGER Layer YEAR  IE-UK -----------
+--------------SAVING FREIGHT Layer YEAR  IE-UK -----------
+--------------SAVING Cooling Layer YEAR  IE-UK -----------
+--------------SAVING H2Layer YEAR  IE-UK -----------
+--------------SAVING NGLayer YEAR  IE-UK -----------
+--------------SAVING SLFLayer YEAR  IE-UK -----------
+--------- SAVING Exchanges YEAR  IE-UK --------
+--------- SAVING Resources balance YEAR  IE-UK --------
+--------------SAVING Elec Layer TD IE-UK -----------
+--------------SAVING LT Layer TD IE-UK -----------
+--------------SAVING HT Layer TD IE-UK -----------
+--------------SAVING PASSANGER Layer TD IE-UK -----------
+--------------SAVING FREIGHT Layer TD IE-UK -----------
+--------------SAVING Cooling Layer TD IE-UK -----------
+--------------SAVING H2Layer TD IE-UK -----------
+--------------SAVING NGLayer TD IE-UK -----------
+--------------SAVING SLFLayer TD IE-UK -----------
+--------- SAVING Exchanges TD IE-UK --------
+--------- SAVING Resources balance TD IE-UK --------
+--------------SAVING COST  BE-DE-LU-NL -----------
+--------------SAVING GWP  BE-DE-LU-NL -----------
+--------------SAVING losses  BE-DE-LU-NL -----------
+--------------SAVING ASSETS  BE-DE-LU-NL -----------
+--------- SAVING Yearly balances  BE-DE-LU-NL --------
+--------- SAVING Exchanges balance  BE-DE-LU-NL --------
+--------- SAVING Resources balances  BE-DE-LU-NL --------
+--------------SAVING elec Storage YEAR  BE-DE-LU-NL -----------
+--------------SAVING TS Storage YEAR  BE-DE-LU-NL -----------
+--------------SAVING Elec Layer YEAR  BE-DE-LU-NL -----------
+--------------SAVING LT Layer YEAR  BE-DE-LU-NL -----------
+--------------SAVING HT Layer YEAR  BE-DE-LU-NL -----------
+--------------SAVING PASSANGER Layer YEAR  BE-DE-LU-NL -----------
+--------------SAVING FREIGHT Layer YEAR  BE-DE-LU-NL -----------
+--------------SAVING Cooling Layer YEAR  BE-DE-LU-NL -----------
+--------------SAVING H2Layer YEAR  BE-DE-LU-NL -----------
+--------------SAVING NGLayer YEAR  BE-DE-LU-NL -----------
+--------------SAVING SLFLayer YEAR  BE-DE-LU-NL -----------
+--------- SAVING Exchanges YEAR  BE-DE-LU-NL --------
+--------- SAVING Resources balance YEAR  BE-DE-LU-NL --------
+--------------SAVING Elec Layer TD BE-DE-LU-NL -----------
+--------------SAVING LT Layer TD BE-DE-LU-NL -----------
+--------------SAVING HT Layer TD BE-DE-LU-NL -----------
+--------------SAVING PASSANGER Layer TD BE-DE-LU-NL -----------
+--------------SAVING FREIGHT Layer TD BE-DE-LU-NL -----------
+--------------SAVING Cooling Layer TD BE-DE-LU-NL -----------
+--------------SAVING H2Layer TD BE-DE-LU-NL -----------
+--------------SAVING NGLayer TD BE-DE-LU-NL -----------
+--------------SAVING SLFLayer TD BE-DE-LU-NL -----------
+--------- SAVING Exchanges TD BE-DE-LU-NL --------
+--------- SAVING Resources balance TD BE-DE-LU-NL --------
+--------------SAVING COST  AT-CH-IT -----------
+--------------SAVING GWP  AT-CH-IT -----------
+--------------SAVING losses  AT-CH-IT -----------
+--------------SAVING ASSETS  AT-CH-IT -----------
+--------- SAVING Yearly balances  AT-CH-IT --------
+--------- SAVING Exchanges balance  AT-CH-IT --------
+--------- SAVING Resources balances  AT-CH-IT --------
+--------------SAVING elec Storage YEAR  AT-CH-IT -----------
+--------------SAVING TS Storage YEAR  AT-CH-IT -----------
+--------------SAVING Elec Layer YEAR  AT-CH-IT -----------
+--------------SAVING LT Layer YEAR  AT-CH-IT -----------
+--------------SAVING HT Layer YEAR  AT-CH-IT -----------
+--------------SAVING PASSANGER Layer YEAR  AT-CH-IT -----------
+--------------SAVING FREIGHT Layer YEAR  AT-CH-IT -----------
+--------------SAVING Cooling Layer YEAR  AT-CH-IT -----------
+--------------SAVING H2Layer YEAR  AT-CH-IT -----------
+--------------SAVING NGLayer YEAR  AT-CH-IT -----------
+--------------SAVING SLFLayer YEAR  AT-CH-IT -----------
+--------- SAVING Exchanges YEAR  AT-CH-IT --------
+--------- SAVING Resources balance YEAR  AT-CH-IT --------
+--------------SAVING Elec Layer TD AT-CH-IT -----------
+--------------SAVING LT Layer TD AT-CH-IT -----------
+--------------SAVING HT Layer TD AT-CH-IT -----------
+--------------SAVING PASSANGER Layer TD AT-CH-IT -----------
+--------------SAVING FREIGHT Layer TD AT-CH-IT -----------
+--------------SAVING Cooling Layer TD AT-CH-IT -----------
+--------------SAVING H2Layer TD AT-CH-IT -----------
+--------------SAVING NGLayer TD AT-CH-IT -----------
+--------------SAVING SLFLayer TD AT-CH-IT -----------
+--------- SAVING Exchanges TD AT-CH-IT --------
+--------- SAVING Resources balance TD AT-CH-IT --------
+--------------SAVING COST  DK-SE -----------
+--------------SAVING GWP  DK-SE -----------
+--------------SAVING losses  DK-SE -----------
+--------------SAVING ASSETS  DK-SE -----------
+--------- SAVING Yearly balances  DK-SE --------
+--------- SAVING Exchanges balance  DK-SE --------
+--------- SAVING Resources balances  DK-SE --------
+--------------SAVING elec Storage YEAR  DK-SE -----------
+--------------SAVING TS Storage YEAR  DK-SE -----------
+--------------SAVING Elec Layer YEAR  DK-SE -----------
+--------------SAVING LT Layer YEAR  DK-SE -----------
+--------------SAVING HT Layer YEAR  DK-SE -----------
+--------------SAVING PASSANGER Layer YEAR  DK-SE -----------
+--------------SAVING FREIGHT Layer YEAR  DK-SE -----------
+--------------SAVING Cooling Layer YEAR  DK-SE -----------
+--------------SAVING H2Layer YEAR  DK-SE -----------
+--------------SAVING NGLayer YEAR  DK-SE -----------
+--------------SAVING SLFLayer YEAR  DK-SE -----------
+--------- SAVING Exchanges YEAR  DK-SE --------
+--------- SAVING Resources balance YEAR  DK-SE --------
+--------------SAVING Elec Layer TD DK-SE -----------
+--------------SAVING LT Layer TD DK-SE -----------
+--------------SAVING HT Layer TD DK-SE -----------
+--------------SAVING PASSANGER Layer TD DK-SE -----------
+--------------SAVING FREIGHT Layer TD DK-SE -----------
+--------------SAVING Cooling Layer TD DK-SE -----------
+--------------SAVING H2Layer TD DK-SE -----------
+--------------SAVING NGLayer TD DK-SE -----------
+--------------SAVING SLFLayer TD DK-SE -----------
+--------- SAVING Exchanges TD DK-SE --------
+--------- SAVING Resources balance TD DK-SE --------
+--------------SAVING Transfer capacities-----------
+--------------SAVING Used TC-----------
+--------------SAVING Total transfers-----------
+--------------SAVING COST ALL -----------
+--------------SAVING GWP ALL -----------
+--------------SAVING losses ALL -----------
+--------------SAVING ASSETS ALL -----------
+--------- SAVING Yearly balances ALL --------
+--------- SAVING Exchanges losses balance ALL --------
+--------- SAVING Resources balance ALL --------
+--------------SAVING elec Storage YEAR ALL -----------
+--------------SAVING TS Storage YEAR ALL -----------
+--------------SAVING Elec Layer YEAR ALL -----------
+--------------SAVING LT Layer YEAR ALL -----------
+--------------SAVING HT Layer YEAR ALL -----------
+--------------SAVING PASSANGER Layer YEAR ALL -----------
+--------------SAVING FREIGHT Layer YEAR ALL -----------
+--------------SAVING Cooling Layer YEAR ALL -----------
+--------------SAVING H2Layer YEAR ALL -----------
+--------------SAVING NGLayer YEAR ALL -----------
+--------------SAVING SLFLayer YEAR ALL -----------
+--------- SAVING Exchanges Losses YEAR ALL --------
+--------- SAVING Resources balance YEAR ALL --------
+--------------SAVING Elec Layer TD ALL -----------
+--------------SAVING LT Layer TD ALL -----------
+--------------SAVING HT Layer TD ALL -----------
+--------------SAVING PASSANGER Layer TD ALL -----------
+--------------SAVING FREIGHT Layer TD ALL -----------
+--------------SAVING Cooling Layer TD ALL -----------
+--------------SAVING H2Layer TD ALL -----------
+--------------SAVING NGLayer TD ALL -----------
+--------------SAVING SLFLayer TD ALL -----------
+--------- SAVING Exchanges Losses TD ALL --------
+--------- SAVING Resources balance TD ALL --------
+--------- SAVING SANKEY --------
+--------- SAVING SANKEY --------
+--------- SAVING SANKEY --------
+--------- SAVING SANKEY --------
+--------- SAVING SANKEY --------
+--------- SAVING SANKEY --------
+--------- SAVING SANKEY --------

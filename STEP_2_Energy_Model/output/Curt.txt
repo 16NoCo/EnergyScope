@@ -1,0 +1,7 @@
+Country	ES-PT	FR	IE-UK	BE-DE-LU-NL	AT-CH-IT	DK-SE
+Curtailment	5331.42
+Curtailment	0.00
+Curtailment	44359.60
+Curtailment	1140.91
+Curtailment	4714.81
+Curtailment	114164.81

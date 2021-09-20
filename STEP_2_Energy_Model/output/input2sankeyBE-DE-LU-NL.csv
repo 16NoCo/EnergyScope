@@ -1,0 +1,51 @@
+source,target,realValue,layerID,layerColor,layerUnit
+Diesel,Freight,23.68,Diesel,#D3D3D3,TWh
+NG Fossil,NG,828.48,NG,#FFD700,TWh
+NG,Freight,10.82,NG,#FFD700,TWh
+NG,Mob public,161.68,NG,#FFD700,TWh
+NG,H2,89.17,NG,#FFD700,TWh
+NG,Non-Energy,596.43,NG,#FFD700,TWh
+Wind Onshore,Elec,404.59,Wind Onshore,#27AE34,TWh
+Wind Offshore,Elec,24.93,Wind Offshore,#27AE34,TWh
+Hydro Dams,Elec,0.63,Hydro Dam,#00CED1,TWh
+Hydro River,Elec,13.22,Hydro River,#0000FF,TWh
+Coal,Elec,1331.58,Coal,#A0522D,TWh
+Coal,Boilers,514.26,Coal,#A0522D,TWh
+Solar PV,Elec,56.48,Solar,#FFFF00,TWh
+Waste,Boilers,32.36,Waste,#808000,TWh
+Wet Biomass,NG,99.15,Wet Biomass,#336600,TWh
+Wood,SLF,35.56,Wood,#CD853F,TWh
+Elec,Mob public,16.17,Electricity,#00BFFF,TWh
+Elec,Freight,17.60,Electricity,#00BFFF,TWh
+Elec,Loss,106.24,Electricity,#00BFFF,TWh
+Elec,Elec demand,671.15,Electricity,#00BFFF,TWh
+Elec,Cold,3.18,Electricity,#00BFFF,TWh
+Elec,Chiller,20.04,Electricity,#00BFFF,TWh
+Elec,Storage,3.83,Electricity,#00BFFF,TWh
+Storage,Elec demand,3.31,Electricity,#00BFFF,TWh
+Storage,Loss,0.51,Electricity,#00BFFF,TWh
+Elec,HPs,379.61,Electricity,#00BFFF,TWh
+Elec,H2,401.39,Electricity,#00BFFF,TWh
+H2,Freight,204.14,H2,#FF00FF,TWh
+H2,Mob priv,227.63,H2,#FF00FF,TWh
+HPs,Heat LT Dec,727.29,Heat LT,#FA8072,TWh
+HPs,DHN,485.25,Heat LT,#FA8072,TWh
+HPs,Dec. Sto,47.68,Heat LT,#FA8072,TWh
+SLF,Elec,0.56,Electricity,#00BFFF,TWh
+Boilers,Heat HT,448.23,Heat HT,#DC143C,TWh
+Dec. Sto,Heat LT Dec,45.59,Heat LT,#FA8072,TWh
+DHN,Heat LT DHN,336.11,Heat LT,#FA8072,TWh
+DHN,Loss DHN,34.46,Heat LT,#FA8072,TWh
+DHN,DHN Sto,121.76,Heat LT,#FA8072,TWh
+DHN Sto,Heat LT DHN,117.80,Heat LT,#FA8072,TWh
+SLF,Diesel,23.68,SLF,#8C028C,TWh
+Heat HT,Ind Heat Demand,377.40,Heat HT,#DC143C,TWh
+Cold,Cold Storage,7.65,Cold,#00CED1,TWh
+Cold Storage,Space Cooling,7.15,Cold,#00CED1,TWh
+Cold,Space Cooling,12.08,Cold,#00CED1,TWh
+Chiller,Process Cooling,138.31,Cold,#00CED1,TWh
+Elec,Curt,1.14,Electricity,#00BFFF,TWh
+Elec Import,Elec,533.95,Electricity,#00BFFF,TWh
+Local Wood,Wood,35.56,Wood,#CD853F,TWh
+Local Waste,Waste,32.36,Waste,#808000,TWh
+Elec,Elec Export,109.00,Electricity,#00BFFF,TWh
